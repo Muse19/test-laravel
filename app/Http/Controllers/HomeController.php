@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,6 +16,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $years = Invoice::all()
+            ->sortBy('data_emissao')
+            ->groupBy(function($q){
+                return Carbon::parse($q->data_emissao)->format('Y');
+            })
+            ->keys()
+            ->toArray();
+        
         $consultants = User::whereHas('permission', function($q){
                          $q->where('co_sistema', 1)
                             ->where('in_ativo', 'S')
@@ -21,7 +31,7 @@ class HomeController extends Controller
                         })
                         ->get();
 
-        return view('welcome', compact('consultants'));
+        return view('welcome', compact('consultants', 'years'));
     }
 
     /**

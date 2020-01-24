@@ -29,10 +29,13 @@ class User extends Model
     }
 
     public function scopeOrdersByConsultant($q, $data){
+        
+        $from = $data->y1 .'-'. $data->m1 .'-01';
+        $to = $data->y2 .'-'. $data->m2 .'-31';
+
         return $q->whereIn('co_usuario', $data->users)
-            ->with(['salary','orders.invoices' => function($q) use ($data){
-                $q->whereBetween('data_emissao',[ $data->y1 .'-'. $data->m1 .'-01', $data->y2 .'-'. $data->m2 .'-31']);
-                        
+            ->with(['salary','orders.invoices' => function($q) use ($data, $from, $to){
+                $q->whereBetween('data_emissao',[$from, $to]);         
             }]);
             
         

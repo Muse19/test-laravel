@@ -1,5 +1,9 @@
-<script>
 
+<div class="chart-container" style="position: relative; height:800px; width:80vw">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
   function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -8,25 +12,40 @@
     }
     return color+'55';
   }
-  const labels = ['Red', 'Blue']
-  const data = [12, 19]
-  let colors = new Array()
+  function setDataSets() {
+    let tags = [
+      @foreach($result[0] as  $label)
+      '{{$label}}',
+      @endforeach
+    ]
+    let datos = [
+      @foreach($result[1] as $data)
+      {{$data}},
+      @endforeach
+    ]
 
-  for (let i = 0; i < data.length; i++) {
-    colors.push(getRandomColor())
+    let colors = new Array()
+
+    for (let i = 0; i < datos.length; i++) {
+      colors.push(getRandomColor())
+    }    
+    return {
+      tags,
+      datos,
+      colors
+    }
   }
-  console.log(colors);
   
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels,
+      labels: setDataSets().tags,
       datasets: [{
-        label: '# of Votes',
-        data,
-        backgroundColor: colors,
-        borderColor: colors,
+        label: 'Pizza',
+        data: setDataSets().datos,
+        backgroundColor: setDataSets().colors,
+        borderColor: setDataSets().colors,
         borderWidth: 1
       }]
     },
@@ -42,4 +61,3 @@
   });
 </script>
 
-{{dd($result)}}

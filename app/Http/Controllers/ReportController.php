@@ -15,7 +15,7 @@ class ReportController extends Controller
     {
         
         $data = User::ordersByConsultant($request)->get();
-       
+        
         $items = $this->getRelatorio($data);                     
        
        return view('relatorio', compact('items'));
@@ -28,5 +28,14 @@ class ReportController extends Controller
         $result = $this->getTotalRelatorio($data);
 
         return view('pizza', compact('result'));
+    }
+
+    public function grafico(Request $request)
+    {
+        $data = User::ordersByConsultant($request)->get();
+
+        $result = $this->grafica($data);
+
+        return view('grafico', compact('result'));
     }
 }

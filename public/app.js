@@ -24,10 +24,12 @@ function selectAll(){
 async function relatorio(){
   await selectAll()
   let data = $("#form").serialize()  
+  $("#results").empty()
   $.ajax({
     url:"/relatorio",
     data,
     success: (res) => {
+      $("#results").html('')
       $("#results").html(res)
     }
   })
@@ -36,6 +38,7 @@ async function relatorio(){
 async function grafico(){
   await selectAll()
   const data = $("#form").serialize()
+  $("#results").empty()
   $.ajax({
     url:"/grafico",
     data,
@@ -48,10 +51,11 @@ async function grafico(){
 async function pizza(){
   await selectAll()
   const data = $("#form").serialize()
+  $("#results").empty()
   $.ajax({
     url:"/pizza",
     data,
-    success: (res) => {
+    success: res => {      
       $("#results").html(res)     
     }
   })
@@ -76,4 +80,3 @@ $("#grafico").click( () => {
 $("#pizza").click( () => {
   pizza()
 })
-

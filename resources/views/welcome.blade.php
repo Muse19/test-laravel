@@ -72,11 +72,9 @@
 
           <div class="col-sm-2">
             <select class="custom-select" id="inputGroupSelect01" name="y1">
-              <option value="2003">2003</option>
-              <option value="2004">2004</option>
-              <option value="2005">2005</option>
-              <option value="2006">2006</option>
-              <option value="2007">2007</option>
+              @foreach($years as $year)
+              <option value="{{$year}}">{{$year}}</option>
+              @endforeach
             </select>    
           </div>
 
@@ -103,11 +101,9 @@
 
           <div class="col-sm-2">
             <select class="custom-select" id="inputGroupSelect01" name="y2">
-              <option value="2003">2003</option>
-              <option value="2004">2004</option>
-              <option value="2005">2005</option>
-              <option value="2006">2006</option>
-              <option value="2007">2007</option>
+              @foreach($years as $year)
+              <option value="{{$year}}">{{$year}}</option>
+              @endforeach
             </select>    
           </div>
         </div>
@@ -115,11 +111,7 @@
     </div>
 
 
-
-
-
-
-    <div class="col-sm-12 mt-2">Consulores</div>
+    <div class="col-sm-12 mt-2">Consultores</div>
     <div class="col-sm-12">
       <div class="row">
         <div class="col-sm-4">
@@ -164,6 +156,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="/app.js"></script>
-<canvas id="myChart" width="400" height="400"></canvas>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
 </html>

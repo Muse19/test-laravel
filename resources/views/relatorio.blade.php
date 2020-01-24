@@ -15,13 +15,20 @@
   <tbody>
     @foreach($item->relatorio as $r)
     <tr>
-      <th>Janeiro de 2007</th>
-      <td>R$ {{$r['earning']}}</td>
+      <th>{{$r->period}}</th>
+      <td>R$ {{$r->earning}}</td>
       <td>R$ {{$item->salary}}</td>
-      <td>R$ {{$r['commission']}}</td>
-      <td>R$ {{$r['profit']}}</td>
+      <td>R$ {{$r->commission}}</td>
+      <td>R$ {{$r->profit}}</td>
     </tr>
     @endforeach
+    <tr  class="bg-secondary">
+      <th>SALDO</th>
+      <td>R$ {{$item->relatorio->sum('earning')}}</td>
+      <td>R$ {{$item->salary * $item->relatorio->count()}}</td>
+      <td>R$ {{$item->relatorio->sum('commission')}}</td>
+      <td>R$ {{$item->relatorio->sum('profit')}}</td>
+    <tr>
   </tbody>
 </table>
 @endforeach

@@ -15,4 +15,5 @@ Route::get('/', 'HomeController@index');
 
 Route::get('relatorio', 'ReportController@relatorio');
 Route::get('pizza', 'ReportController@pizza');
+Route::get('grafico', 'ReportController@grafico');
    
