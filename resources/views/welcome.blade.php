@@ -12,7 +12,18 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <style>
+  #myChart{
+    max-height: 400px;
+    width: auto;
+  }
+  @media only screen and (max-width:360px){
+    .full-only-sm-width{
+      width: 100%;
+      text-align: center;
+    } 
+  }
+  </style>
  
 </head>
 
@@ -52,9 +63,9 @@
     <div class="col-sm-12 mt-2">Periodo</div>
     <div class="col-sm-12 mt-2">
       <form id="form" action="">    
-        <div class="row">
-          <div class="col-sm-1">
-            <select class="custom-select" id="inputGroupSelect01" name="m1">
+        <div class="d-flex flex-wrap">
+          <div class="d-flex full-only-sm-width justify-content-center justify-content-sm-start">
+            <select class="custom-select" name="m1" style="width:70px">
               <option value="01">Jan</option>
               <option value="02">Fev</option>
               <option value="03">Mar</option>
@@ -68,22 +79,18 @@
               <option value="11">Nov</option>
               <option value="12">Dez</option>
             </select>    
-          </div>
-
-          <div class="col-sm-2">
-            <select class="custom-select" id="inputGroupSelect01" name="y1">
+  
+            <select class="custom-select ml-1" name="y1" style="width:77px">
               @foreach($years as $year)
               <option value="{{$year}}">{{$year}}</option>
               @endforeach
-            </select>    
-          </div>
+            </select> 
+          </div>   
 
-          <div class="col-sm-1 text-center pt-2">
-            a   
-          </div>
+          <span class="mt-1 mx-2 full-only-sm-width">a</span>   
 
-          <div class="col-sm-1">
-            <select class="custom-select" id="inputGroupSelect01" name="m2">
+          <div class="d-flex full-only-sm-width justify-content-center justify-content-sm-start">
+            <select class="custom-select" name="m2" style="width:70px">
               <option value="01">Jan</option>
               <option value="02">Fev</option>
               <option value="03">Mar</option>
@@ -97,15 +104,13 @@
               <option value="11">Nov</option>
               <option value="12">Dez</option>
             </select>    
-          </div>
-
-          <div class="col-sm-2">
-            <select class="custom-select" id="inputGroupSelect01" name="y2">
+  
+            <select class="custom-select ml-1" name="y2" style="width:77px">
               @foreach($years as $year)
               <option value="{{$year}}">{{$year}}</option>
               @endforeach
-            </select>    
-          </div>
+            </select>
+          </div>    
         </div>
       </form>
     </div>
@@ -114,7 +119,7 @@
     <div class="col-sm-12 mt-2">Consultores</div>
     <div class="col-sm-12">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-md-4">
           <div class="form-group">
             <select id="consultants" multiple class="form-control" id="exampleFormControlSelect2">
               @foreach($consultants as $consultant)
@@ -123,20 +128,20 @@
             </select>
           </div>
         </div>
-        <div class="col-sm-1">
-          <button id="addConsultants" type="button" class="btn btn-primary m-2">>></button>
-          <button id="removeConsultants" type="button" class="btn btn-primary m-2"><<</button>
+        <div class="col-md-2 text-center">
+          <button id="addConsultants" type="button" class="btn btn-outline-success mx-sm-4 mb-3 btn-sm"><b>>></b></button>
+          <button id="removeConsultants" type="button" class="btn btn-outline-danger mx-sm-4 mb-3 btn-sm"><b><<</b></button>
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-4">
           <div class="form-group">
             <select form="form" name="users[]" id="consultantsQuery" multiple class="form-control" id="exampleFormControlSelect2">
             </select>
           </div>
         </div>
-        <div class="col-sm-3">
-          <button id="relatorio" type="button" class="btn btn-primary">Relatório</button>
-          <button id="grafico" type="button" class="btn btn-primary">Gráfico</button>
-          <button id="pizza" type="button" class="btn btn-primary">Pizza</button>
+        <div class="col-md-2 d-flex d-sm-block flex-column">
+          <button id="relatorio" type="button" class="btn btn-primary mx-sm-5 mt-1 btn-sm">Relatório</button>
+          <button id="grafico" type="button" class="btn btn-primary mx-sm-5 mt-1 btn-sm">Gráfico</button>
+          <button id="pizza" type="button" class="btn btn-primary mx-sm-5 mt-1 btn-sm">Pizza</button>
         </div>
       </div>
     </div>   
@@ -156,7 +161,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="/app.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+
 <script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
 </html>

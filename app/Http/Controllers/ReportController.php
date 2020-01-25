@@ -13,8 +13,16 @@ class ReportController extends Controller
 
     public function relatorio(Request $request)
     {
-        
-        $data = User::ordersByConsultant($request)->get();
+        if(!$this->validatePeriod($request->except('users')))
+        {
+            return response()->json(['error' => 'Ingrese un período válido.'], 422);
+        }
+
+        if(!$request->filled('users')){
+            return response()->json(['error' => 'Ingrese consultores.'], 422);
+        }
+
+        $data = User::consultantWithOrders($request)->get();
         
         $items = $this->getRelatorio($data);                     
        
@@ -23,7 +31,16 @@ class ReportController extends Controller
 
     public function pizza(Request $request)
     {
-        $data = User::ordersByConsultant($request)->get();
+        if(!$this->validatePeriod($request->except('users')))
+        {
+            return response()->json(['error' => 'Ingrese un período válido.'], 403);
+        }
+
+        if(!$request->filled('users')){
+            return response()->json(['error' => 'Ingrese consultores.'], 422);
+        }
+        
+        $data = User::consultantWithOrders($request)->get();
 
         $result = $this->getTotalRelatorio($data);
 
@@ -32,7 +49,16 @@ class ReportController extends Controller
 
     public function grafico(Request $request)
     {
-        $data = User::ordersByConsultant($request)->get();
+        if(!$this->validatePeriod($request->except('users')))
+        {
+            return response()->json(['error' => 'Ingrese un período válido.'], 403);
+        }
+
+        if(!$request->filled('users')){
+            return response()->json(['error' => 'Ingrese consultores.'], 422);
+        }
+        
+        $data = User::consultantWithOrders($request)->get();
 
         $result = $this->grafica($data);
 

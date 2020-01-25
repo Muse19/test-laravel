@@ -31,6 +31,9 @@ async function relatorio(){
     success: (res) => {
       $("#results").html('')
       $("#results").html(res)
+    },
+    error: (err) => {     
+      $("#results").html(`<div class="alert alert-danger" role="alert">${err.responseJSON.error}</div>`)
     }
   })
 }
@@ -44,6 +47,9 @@ async function grafico(){
     data,
     success: (res) => {
       $("#results").html(res)    
+    },
+    error: (err) => {
+      $("#results").html(`<div class="alert alert-danger" role="alert">${err.responseJSON.error}</div>`)
     }
   })
 }
@@ -57,6 +63,9 @@ async function pizza(){
     data,
     success: res => {      
       $("#results").html(res)     
+    },
+    error: (err) => {
+      $("#results").html(`<div class="alert alert-danger" role="alert">${err.responseJSON.error}</div>`)
     }
   })
 }
@@ -80,3 +89,4 @@ $("#grafico").click( () => {
 $("#pizza").click( () => {
   pizza()
 })
+

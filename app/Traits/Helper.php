@@ -7,6 +7,7 @@ use Carbon\Carbon;
 trait Helper 
 {
  
+  //Calculo de las ganancias por mes de cada consultor
   private function getReceita($data)
   {
     $result = 0;
@@ -18,6 +19,7 @@ trait Helper
     return round($result, 2);
   }
 
+  //Calculo de comisiones por mes de cada consultor
   private function getCommission($data)
   {
    
@@ -30,6 +32,7 @@ trait Helper
     return round($result, 2);
   }
 
+  //Calculo de las ganancias por mes de cada consultor
   private function getEarningsByMonth($data, $months)
   {
     
@@ -48,6 +51,26 @@ trait Helper
     return $result;
   }
 
+  
+  //Valida el periodo ingresado
+  private function validatePeriod($data)
+  {
+    
+    if((int)$data['y1'] === (int)$data['y2']){
+      if((int)$data['m1'] > (int)$data['m2'])
+      {
+        return false;
+      }
+    }else{
+      if((int)$data['y1'] > (int)$data['y2']){
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  //Obtener el periodo
   private function getPeriod($data)
   {
     $months = [
@@ -77,6 +100,7 @@ trait Helper
     return $this->calculateRelatorio($r);
   }
 
+  //Calculo de los datos para la grafica de pizza
   private function getTotalRelatorio($data)
   {
     
@@ -156,7 +180,7 @@ trait Helper
       });
     
       $data = (object)[
-        'salary' => !$item->salary ? 0 : $item->salary->brut_salario,
+        'salary' => !$item->salary ? 0.0 : $item->salary->brut_salario,
         'consultant' => $item->no_usuario,
         'invoices' => $invoices
       ];
@@ -164,6 +188,7 @@ trait Helper
     });
   }
 
+  //Calculo de los datos para la grafica de barras
   private function grafica($data)
   {
     $data = $this->getRelatorio($data);

@@ -28,7 +28,7 @@ class User extends Model
         return $this->hasMany(Permission::class, 'co_usuario');
     }
 
-    public function scopeOrdersByConsultant($q, $data){
+    public function scopeConsultantWithOrders($q, $data){
         
         $from = $data->y1 .'-'. $data->m1 .'-01';
         $to = $data->y2 .'-'. $data->m2 .'-31';
